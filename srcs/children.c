@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 10:28:55 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/09 14:20:43 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:42:06 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	first_child(t_pipex pipex, char **argv, char **envp)
 		show_error("dup2 error");
 	close(pipex.pipefd[0]);
 	dup2(pipex.pipefd[1], 1);
+	close(pipex.pipefd[1]);
 	if (ft_strncmp(pipex.command1[0], "/", 1) == 0)
 	{
 		pipex.cmd1 = pipex.command1[0];
@@ -89,6 +90,7 @@ void	second_child(t_pipex pipex, char **argv, char **envp)
 		strerror(errno);
 	close(pipex.pipefd[1]);
 	dup2(pipex.outfile, 1);
+	close(pipex.pipefd[0]);
 	if (ft_strncmp(pipex.command2[0], "/", 1) == 0)
 	{
 		pipex.cmd2 = pipex.command2[0];

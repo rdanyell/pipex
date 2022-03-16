@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 14:28:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/09 17:02:31 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:29:13 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_pipex
 	int		pipefd[2];
 	char	*path;
 	char	**path_cmd;
-	char	**command1;
+	char	command1;
 	char	**command2;
 	char	*cmd1;
 	char	*cmd2;
@@ -45,6 +45,8 @@ void	free_parent(t_pipex *pipex);
 void	free_child(t_pipex pipex);
 void	show_error(char *error);
 int		print_error(char *error);
+void	open_infile(char **argv, t_pipex *pipex);
+void	open_outfile(char **argv, t_pipex *pipex);
 
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
