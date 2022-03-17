@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 14:25:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:53:11 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/22 11:50:49 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/03/17 13:43:51 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// void redirect(char argv[2], envp, pipex.infile);
-
-int	main(int argc, char **argv, char **envp)
+int	ft_strlen(const char *str)
 {
-	t_pipex	pipex;
+	int	n;
 
-	parse_args(argc, argv, envp, &pipex);
-	open_infile(argv, &pipex);
-	open_outfile(argv, &pipex);
-	dup2(pipex.infile, 0);
-	dup2(pipex.outfile, 1);
-	//redirect(argv[2], envp, pipex.infile);
-	return (0);
+	n = 0;
+	while (str[n] != '\0')
+	{
+		n++;
+	}
+	return (n);
 }

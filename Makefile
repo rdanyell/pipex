@@ -6,7 +6,7 @@
 #    By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 12:33:05 by rdanyell          #+#    #+#              #
-#    Updated: 2022/03/09 16:58:50 by rdanyell         ###   ########.fr        #
+#    Updated: 2022/03/17 13:52:47 by rdanyell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ HEADER_PB	= includes/pipex_bonus.h
 
 DIR_P		= srcs/
 
-DIR_UTILS	= utils/
+DIR_UTILS	= utils_bonus/
 
 DIR_PB		= bonus/
 

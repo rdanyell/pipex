@@ -1,28 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 14:25:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:53:11 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/11/12 18:15:11 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/03/17 13:44:21 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// void redirect(char argv[2], envp, pipex.infile);
-
-int	main(int argc, char **argv, char **envp)
+int	ft_strlen_gnl(char *str)
 {
-	t_pipex	pipex;
+	int	n;
 
-	parse_args(argc, argv, envp, &pipex);
-	open_infile(argv, &pipex);
-	open_outfile(argv, &pipex);
-	dup2(pipex.infile, 0);
-	dup2(pipex.outfile, 1);
-	//redirect(argv[2], envp, pipex.infile);
-	return (0);
+	if (!str)
+		return (0);
+	n = 0;
+	while (str[n] != '\0')
+	{
+		n++;
+	}
+	return (n);
+}
+
+char	*ft_strchr_gnl(const char *s, int c)
+{
+	char	*pos;
+	int		i;
+
+	i = 0;
+	pos = (char *)s;
+	if (!s)
+		return (NULL);
+	while (pos[i])
+	{
+		if (pos [i] == c)
+			return (&pos[i]);
+		pos++;
+	}
+	if (c == '\0')
+		return (&pos[i]);
+	return (NULL);
 }

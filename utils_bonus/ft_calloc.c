@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 14:25:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:53:11 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/25 13:51:07 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/03/17 13:42:35 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// void redirect(char argv[2], envp, pipex.infile);
-
-int	main(int argc, char **argv, char **envp)
+void	*ft_calloc(size_t count, size_t size)
 {
-	t_pipex	pipex;
+	void	*ptr;
 
-	parse_args(argc, argv, envp, &pipex);
-	open_infile(argv, &pipex);
-	open_outfile(argv, &pipex);
-	dup2(pipex.infile, 0);
-	dup2(pipex.outfile, 1);
-	//redirect(argv[2], envp, pipex.infile);
-	return (0);
+	ptr = malloc(count * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, size * count);
+	return (ptr);
 }

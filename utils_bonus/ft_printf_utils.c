@@ -6,11 +6,11 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:51:09 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:40:16 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:43:19 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 size_t	ft_putchar_len(char c)
 {

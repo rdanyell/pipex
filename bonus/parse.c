@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:55:56 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/16 17:28:27 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:57:51 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,27 @@ void	here_doc(char *limiter, t_pipex *pipex)
 	}
 }
 
+void	parse_cmds(char **argv, t_pipex	*pipex)
+{
+	int	i;
+	int	j;
+	
+	j = 0;
+	i = 2;
+	if (pipex->here_doc == 1)
+		i =3;
+	while (j < pipex->cmd_num)
+	{
+		pipex->cmds[j]->cmd_args = argv[i];
+		j++;
+		i++;
+	}
+	printf("%s\n", pipex->cmds[j]->cmd_args);
+	
+}
+
 void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex)
 {
-	printf("%s\n", argv[1]);
 	if (argv[1] && !ft_strncmp(argv[1], "here_doc", 9) && argc >=6)
 	{
 		pipex->here_doc = 1;
@@ -70,16 +88,11 @@ void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex)
 		exit(1);
 	}
 	else
-	{ 
 		pipex->here_doc = 0;
-
-	}
 	pipex->path = find_path(envp);
 	pipex->path_cmd = ft_split(pipex->path, ':');
-	
-	
-	// pipex->command1 = ft_split(argv[2], ' ');
-	// pipex->command2 = ft_split(argv[3], ' ');
+	pipex->cmd_num = argc - 4 - pipex->here_doc;
+	parse_cmds(argv, pipex);
 	return ;
 }
 

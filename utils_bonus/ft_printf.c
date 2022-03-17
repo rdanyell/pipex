@@ -6,11 +6,11 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 12:18:48 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:40:10 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:43:30 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 size_t	ft_putnbrhex_low(unsigned long n)
 

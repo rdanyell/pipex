@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 14:25:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:53:11 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/11/12 16:21:44 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/03/17 13:44:27 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// void redirect(char argv[2], envp, pipex.infile);
-
-int	main(int argc, char **argv, char **envp)
+int	get_next_line(char **line)
 {
-	t_pipex	pipex;
+	int		result;
+	int		i;
+	char	*buffer;
 
-	parse_args(argc, argv, envp, &pipex);
-	open_infile(argv, &pipex);
-	open_outfile(argv, &pipex);
-	dup2(pipex.infile, 0);
-	dup2(pipex.outfile, 1);
-	//redirect(argv[2], envp, pipex.infile);
-	return (0);
+	result = 0;
+	i = 0;
+	buffer = malloc(100000);
+	if (!buffer)
+		return(0);
+	*line = buffer;
+	result = read(0, &buffer[i], 1);
+	while (result > 0 && buffer[i] != '\n')
+	{	
+		i++;
+		result = read(0, &buffer[i], 1);
+	}
+	buffer[i] = '\0';
+	return (result);
 }

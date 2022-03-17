@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 14:25:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:53:11 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/23 15:23:12 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/03/17 13:44:02 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// void redirect(char argv[2], envp, pipex.infile);
-
-int	main(int argc, char **argv, char **envp)
+int	ft_strncmp( const char *s1, const char *s2, size_t n )
 {
-	t_pipex	pipex;
-
-	parse_args(argc, argv, envp, &pipex);
-	open_infile(argv, &pipex);
-	open_outfile(argv, &pipex);
-	dup2(pipex.infile, 0);
-	dup2(pipex.outfile, 1);
-	//redirect(argv[2], envp, pipex.infile);
-	return (0);
+	if (n == 0)
+		return (0);
+	while ((*s1 && *s2) && (n - 1 > 0))
+	{
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		n--;
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

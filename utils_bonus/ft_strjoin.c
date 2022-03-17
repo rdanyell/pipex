@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 14:25:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:53:11 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/22 17:34:45 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/03/17 13:43:45 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// void redirect(char argv[2], envp, pipex.infile);
-
-int	main(int argc, char **argv, char **envp)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_pipex	pipex;
+	char	*dst;
+	int		len1;
+	int		len2;
+	int		i;
 
-	parse_args(argc, argv, envp, &pipex);
-	open_infile(argv, &pipex);
-	open_outfile(argv, &pipex);
-	dup2(pipex.infile, 0);
-	dup2(pipex.outfile, 1);
-	//redirect(argv[2], envp, pipex.infile);
-	return (0);
+	i = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen((char *)s1);
+	len2 = ft_strlen((char *)s2);
+	dst = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!dst)
+		return (NULL);
+	while (*s1)
+		dst[i++] = *s1++;
+	while (*s2)
+		dst[i++] = *s2++;
+	dst[i] = '\0';
+	return (dst);
 }

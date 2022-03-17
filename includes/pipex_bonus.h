@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 14:28:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/16 17:29:13 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:52:13 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,19 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <string.h>
+# include <errno.h>
+# include <stdarg.h> 
 # include <sys/wait.h>
 # include <sys/types.h>
+
+typedef struct s_cmds
+{
+	char	*cmd;
+	char	*args;
+	char	*cmd_args;
+}	t_cmds;
+
 
 typedef struct s_pipex
 {
@@ -27,15 +38,11 @@ typedef struct s_pipex
 	int		pipefd[2];
 	char	*path;
 	char	**path_cmd;
-	char	command1;
-	char	**command2;
-	char	*cmd1;
-	char	*cmd2;
 	int		here_doc;
 	int		cmd_num;
-	int		pipe_num;
 	pid_t	pid1;
 	pid_t	pid2;
+	t_cmds	*cmds[100];
 }	t_pipex;
 
 void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex);
@@ -54,8 +61,13 @@ char	*ft_strrchr(const char *str, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strncmp( const char *s1, const char *s2, size_t n );
 int		ft_strlen(const char *str);
+int		ft_printf(const char *str, ...);
 int		get_next_line(char **line);
 int		ft_strlen_gnl(char *str);
 char	*ft_strchr_gnl(const char *s, int c);
+size_t	ft_putchar_len(char c);
+size_t	ft_putstr_len(char *s);
+size_t	ft_putnbr_len(int n);
+size_t	ft_putnbru_len(unsigned int n);
 
 #endif 
