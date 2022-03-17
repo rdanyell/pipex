@@ -6,7 +6,7 @@
 #    By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 12:33:05 by rdanyell          #+#    #+#              #
-#    Updated: 2022/03/17 13:52:47 by rdanyell         ###   ########.fr        #
+#    Updated: 2022/03/17 15:47:45 by rdanyell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ DIR_PB		= bonus/
 FILES_P		= main.c children.c free.c
 
 FILES_UTILS	= ft_split.c ft_strlen.c ft_strncmp.c ft_strrchr.c ft_substr.c ft_strjoin.c \
-				ft_printf.c ft_printf_utils.c get_next_line.c get_next_line_utils.c
+				ft_printf.c ft_printf_utils.c get_next_line.c get_next_line_utils.c \
+				ft_strlcpy.c ft_strdup.c
 
 FILES_PB	= main_bonus.c error.c parse.c
 

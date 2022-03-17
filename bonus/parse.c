@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:55:56 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:57:51 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:25:55 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,35 @@ void	parse_cmds(char **argv, t_pipex	*pipex)
 {
 	int	i;
 	int	j;
-	
+	//int	k;
+
 	j = 0;
 	i = 2;
+	//k = 0;
 	if (pipex->here_doc == 1)
 		i =3;
+	pipex->cmds[0] = NULL;
 	while (j < pipex->cmd_num)
 	{
-		pipex->cmds[j]->cmd_args = argv[i];
+		pipex->cmds[j] = malloc (sizeof(t_cmds));
+		if (!pipex->cmds[j])
+			printf("malloc error");
+		pipex->cmds[j]->cmd_args = NULL;
+		pipex->cmds[j]->cmd_args = ft_strdup(argv[i]);
 		j++;
 		i++;
 	}
-	printf("%s\n", pipex->cmds[j]->cmd_args);
 	
+
+//	pipex->cmds[0]->cmd_args = &tmp;
+	// 	j++;
+	// 	i++;
+	// }
+	//printf("%s\n", pipex->cmds[0]->cmd_args);
+	//ft_strlcpy(pipex->cmds[0]->cmd_args, argv[2], ft_strlen(argv[i]));
+	printf("CMD_ARGS %s\n", pipex->cmds[1]->cmd_args);
+	printf("%i\n", pipex->cmd_num);
+	//printf("strlen: %i\n", ft_strlen(argv[2]));
 }
 
 void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex)
@@ -91,7 +107,7 @@ void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex)
 		pipex->here_doc = 0;
 	pipex->path = find_path(envp);
 	pipex->path_cmd = ft_split(pipex->path, ':');
-	pipex->cmd_num = argc - 4 - pipex->here_doc;
+	pipex->cmd_num = argc - 3 - pipex->here_doc;
 	parse_cmds(argv, pipex);
 	return ;
 }

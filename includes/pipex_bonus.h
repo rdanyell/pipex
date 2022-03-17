@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 14:28:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 13:52:13 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:23:20 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ int		ft_printf(const char *str, ...);
 int		get_next_line(char **line);
 int		ft_strlen_gnl(char *str);
 char	*ft_strchr_gnl(const char *s, int c);
+char	*ft_strdup(const char *s1);
 size_t	ft_putchar_len(char c);
 size_t	ft_putstr_len(char *s);
 size_t	ft_putnbr_len(int n);
 size_t	ft_putnbru_len(unsigned int n);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 #endif 
