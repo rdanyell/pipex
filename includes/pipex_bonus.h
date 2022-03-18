@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 14:28:54 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 17:23:20 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/18 18:30:24 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@
 
 typedef struct s_cmds
 {
-	char	*cmd;
-	char	*args;
+	char	**cmd;
 	char	*cmd_args;
 }	t_cmds;
 
@@ -35,13 +34,15 @@ typedef struct s_pipex
 {
 	int		infile;
 	int		outfile;
-	int		pipefd[2];
+	int		i;
 	char	*path;
 	char	**path_cmd;
 	int		here_doc;
 	int		cmd_num;
-	pid_t	pid1;
-	pid_t	pid2;
+	char	*cmd_exec;
+	// pid_t	pid1;
+	// pid_t	pid2;
+	// int		pipefd[2]
 	t_cmds	*cmds[100];
 }	t_pipex;
 
@@ -49,11 +50,11 @@ void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex);
 void	first_child(t_pipex pipex, char **argv, char **envp);
 void	second_child(t_pipex pipex, char **argv, char **envp);
 void	free_parent(t_pipex *pipex);
-void	free_child(t_pipex pipex);
+void	free_child(t_pipex *pipex);
 void	show_error(char *error);
 int		print_error(char *error);
 void	open_infile(char **argv, t_pipex *pipex);
-void	open_outfile(char **argv, t_pipex *pipex);
+void	open_outfile(char *filename, t_pipex *pipex);
 
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

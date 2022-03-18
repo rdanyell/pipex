@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:55:56 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/17 17:25:55 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/18 18:30:36 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,9 @@ void	parse_cmds(char **argv, t_pipex	*pipex)
 {
 	int	i;
 	int	j;
-	//int	k;
 
 	j = 0;
 	i = 2;
-	//k = 0;
 	if (pipex->here_doc == 1)
 		i =3;
 	pipex->cmds[0] = NULL;
@@ -75,20 +73,10 @@ void	parse_cmds(char **argv, t_pipex	*pipex)
 			printf("malloc error");
 		pipex->cmds[j]->cmd_args = NULL;
 		pipex->cmds[j]->cmd_args = ft_strdup(argv[i]);
+		pipex->cmds[j]->cmd = ft_split(argv[i], ' ');
 		j++;
 		i++;
 	}
-	
-
-//	pipex->cmds[0]->cmd_args = &tmp;
-	// 	j++;
-	// 	i++;
-	// }
-	//printf("%s\n", pipex->cmds[0]->cmd_args);
-	//ft_strlcpy(pipex->cmds[0]->cmd_args, argv[2], ft_strlen(argv[i]));
-	printf("CMD_ARGS %s\n", pipex->cmds[1]->cmd_args);
-	printf("%i\n", pipex->cmd_num);
-	//printf("strlen: %i\n", ft_strlen(argv[2]));
 }
 
 void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex)
@@ -98,7 +86,7 @@ void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex)
 		pipex->here_doc = 1;
 		here_doc(argv[2], pipex);
 	}
-	else if (argc != 5)
+	else if (argc < 5)
 	{
 		print_error("Invalid number of arguments\n");
 		exit(1);
@@ -122,15 +110,15 @@ void	open_infile(char **argv, t_pipex *pipex)
 	}
 }
 
-void	open_outfile(char **argv, t_pipex *pipex)
+void	open_outfile(char *filename, t_pipex *pipex)
 {
 	char	*str;
 
-	pipex->outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	pipex->outfile = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (pipex->outfile < 0)
 	{
 		write(2, "/pipex: ", 8);
-		print_error(argv[4]);
+		print_error(filename);
 		str = strerror(errno);
 		ft_printf(": %s\n", str);
 		exit(1);
