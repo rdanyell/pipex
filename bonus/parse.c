@@ -6,7 +6,7 @@
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:55:56 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/18 18:30:36 by rdanyell         ###   ########.fr       */
+/*   Updated: 2022/03/18 18:46:23 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	here_doc(char *limiter, t_pipex *pipex)
 		if (get_next_line(&line) < 0)
 			exit (1);
 		if (!ft_strncmp(limiter, line, ft_strlen(limiter) + 1))
-			break;
+			break ;
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
@@ -64,7 +64,7 @@ void	parse_cmds(char **argv, t_pipex	*pipex)
 	j = 0;
 	i = 2;
 	if (pipex->here_doc == 1)
-		i =3;
+		i = 3;
 	pipex->cmds[0] = NULL;
 	while (j < pipex->cmd_num)
 	{
@@ -81,7 +81,7 @@ void	parse_cmds(char **argv, t_pipex	*pipex)
 
 void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex)
 {
-	if (argv[1] && !ft_strncmp(argv[1], "here_doc", 9) && argc >=6)
+	if (argv[1] && !ft_strncmp(argv[1], "here_doc", 9) && argc >= 6)
 	{
 		pipex->here_doc = 1;
 		here_doc(argv[2], pipex);
@@ -98,29 +98,4 @@ void	parse_args(int argc, char **argv, char **envp, t_pipex *pipex)
 	pipex->cmd_num = argc - 3 - pipex->here_doc;
 	parse_cmds(argv, pipex);
 	return ;
-}
-
-void	open_infile(char **argv, t_pipex *pipex)
-{
-	pipex->infile = open(argv[1], O_RDONLY);
-	if (pipex->infile < 0)
-	{
-		show_error(argv[1]);
-		exit(1);
-	}
-}
-
-void	open_outfile(char *filename, t_pipex *pipex)
-{
-	char	*str;
-
-	pipex->outfile = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (pipex->outfile < 0)
-	{
-		write(2, "/pipex: ", 8);
-		print_error(filename);
-		str = strerror(errno);
-		ft_printf(": %s\n", str);
-		exit(1);
-	}
 }
