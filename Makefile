@@ -6,72 +6,68 @@
 #    By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 12:33:05 by rdanyell          #+#    #+#              #
-#    Updated: 2022/02/21 16:30:04 by rdanyell         ###   ########.fr        #
+#    Updated: 2022/03/22 12:18:16 by rdanyell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_PS		= push_swap
+NAME_P		= pipex
 
-NAME_PSB	= checker
+NAME_PB	= pipex
 
-LIB_DIR		= libft/
+INCLUDES_P	= includes/
 
-LIBFT		= $(LIB_DIR)/libft.a
+HEADER_P	= includes/pipex.h
 
-INCLUDES_PS	= includes/
+HEADER_PB	= includes/pipex_bonus.h
 
-HEADER_PS	= includes/push_swap.h
+DIR_P		= srcs/
 
-HEADER_PSB	= includes/push_swap_bonus.h
+DIR_UTILS	= utils/
 
-DIR_PS		= srcs/
+DIR_UTILSB	= utils_bonus/
 
-DIR_PSB		= bonus/
+DIR_PB		= bonus/
 
-FILES_PS	= main.c create_list.c atoi_ps.c ft_parse.c actions.c actions2.c \
-			actions3.c actions4.c solve.c sort.c scores.c scripts.c		
+FILES_P		= main.c children.c free.c
 
-FILES_PSB	= checker_bonus.c create_list_bonus.c atoi_ps_bonus.c ft_parse_bonus.c \
-			actions_bonus.c actions2_bonus.c actions3_bonus.c actions4_bonus.c \
-			solve_bonus.c sort_bonus.c scripts_bonus.c scores_bonus.c
+FILES_UTILS	= ft_split.c ft_strlen.c ft_strncmp.c ft_strrchr.c ft_substr.c ft_strjoin.c \
+				ft_printf.c ft_printf_utils.c get_next_line.c get_next_line_utils.c \
+				ft_strlcpy.c ft_strdup.c
 
-SRCS_PS		= $(addprefix $(DIR_PS), $(FILES_PS))
+FILES_PB	= main_bonus.c error_bonus.c parse_bonus.c free_bonus.c file_bonus.c
 
-SRCS_PSB	= $(addprefix $(DIR_PSB), $(FILES_PSB))
+SRCS_P		= $(addprefix $(DIR_P), $(FILES_P)) $(addprefix $(DIR_UTILS), $(FILES_UTILS))
 
-OBJS_PS		= $(SRCS_PS:%.c=%.o)
+SRCS_PB	= $(addprefix $(DIR_PB), $(FILES_PB)) $(addprefix $(DIR_UTILSB), $(FILES_UTILS))
 
-OBJS_PSB	= $(SRCS_PSB:%.c=%.o)
+OBJS_P		= $(SRCS_P:%.c=%.o)  
+
+OBJS_PB	= $(SRCS_PB:%.c=%.o)
 
 CC 			= cc
 
 CFLAGS		= -Wall -Wextra -Werror
 
-.PHONY: 	all libft clean fclean re bonus
+.PHONY: 	all clean fclean re bonus
 
-all:		libft $(NAME_PS)
-
-libft:
-			make -C $(LIB_DIR)
+all:		$(NAME_P)
 
 bonus:
-			@make NAME_PS="$(NAME_PSB)" \
-			OBJS_PS="$(OBJS_PSB)" \
-			HEADER_PS="$(HEADER_PSB)" all
+			@make NAME_P="$(NAME_PB)" \
+			OBJS_P="$(OBJS_PB)" \
+			HEADER_P="$(HEADER_PB)" all
 
-$(NAME_PS):	$(OBJS_PS)
-			$(CC) $(CFLAGS) $(OBJS_PS) $(LIBFT) -o $@
+$(NAME_P):	$(OBJS_P)
+			$(CC) $(OBJS_P) -o $@
 
-%.o:		%.c $(LIBFT) $(HEADER_PS) 
-			$(CC) $(CFLAGS) -I $(INCLUDES_PS) -c $< -o $@
+%.o:		%.c $(HEADER_P) Makefile
+			$(CC) $(CFLAGS) -I $(INCLUDES_P) -c $< -o $@
 
 clean	:
-			$(RM) $(OBJS_PS) $(OBJS_PSB)
-			make -C $(LIB_DIR) clean
-				
+			$(RM) $(OBJS_P) $(OBJS_PB)
+							
 fclean	:	clean
-			rm -r $(NAME_PS) $(NAME_PSB)
-			make -C $(LIB_DIR) fclean
-
+			rm -r $(NAME_P) 
+			
 re		:	fclean all
 	

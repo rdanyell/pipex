@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 16:21:44 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/22 10:32:22 by rdanyell         ###   ########.fr       */
+/*   Created: 2022/03/09 14:29:38 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/03/18 18:42:08 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-int	get_next_line(char **line)
+int	print_error(char *error)
 {
-	int		result;
-	int		i;
-	char	*buffer;
+	write(2, error, ft_strlen(error));
+	return (1);
+}
 
-	result = 0;
-	i = 0;
-	buffer = malloc(100000);
-	if (!buffer)
-		return (0);
-	*line = buffer;
-	result = read(0, &buffer[i], 1);
-	while (result > 0 && buffer[i] != '\n')
-	{	
-		i++;
-		result = read(0, &buffer[i], 1);
-	}
-	buffer[i] = '\0';
-	return (result);
+void	show_error(char *error)
+{
+	write(2, "/pipex: ", 8);
+	perror(error);
+	exit (1);
 }

@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 16:21:44 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/03/22 10:32:22 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/25 14:08:44 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/03/22 11:52:22 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	get_next_line(char **line)
+char	*ft_strdup(const char *s1)
 {
-	int		result;
-	int		i;
-	char	*buffer;
+	size_t	i;
+	size_t	len;
+	char	*str;
 
-	result = 0;
+	len = ft_strlen((char *) s1);
+	str = (char *)malloc(sizeof(*str) * (len + 1));
+	if (!str)
+		return (NULL);
 	i = 0;
-	buffer = malloc(100000);
-	if (!buffer)
-		return (0);
-	*line = buffer;
-	result = read(0, &buffer[i], 1);
-	while (result > 0 && buffer[i] != '\n')
-	{	
+	while (i < len)
+	{
+		str[i] = s1[i];
 		i++;
-		result = read(0, &buffer[i], 1);
 	}
-	buffer[i] = '\0';
-	return (result);
+	str[i] = '\0';
+	return (str);
 }
