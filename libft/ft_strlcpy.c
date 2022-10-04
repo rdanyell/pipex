@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 13:23:04 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/02/21 14:51:46 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/22 15:41:48 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/02/04 16:21:01 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	write (1, "Error\n", 6);
-	exit(1);
-}
+	size_t	i;
 
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_info	info;
-
-	if (argc < 2)
-		exit(1);
-	stack_a = NULL;
-	stack_b = NULL;
-	stack_a = create_list(argc, argv, &info);
-	solve(&stack_a, &stack_b, &info);
-	clear_stack(stack_a);
-	return (0);
+	i = 0;
+	if (size > 0)
+	{
+		size -= 1;
+		while (src[i] && (i < size))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}	
+	return (ft_strlen((char *) src));
 }

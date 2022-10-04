@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 13:23:04 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/02/21 14:51:46 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/23 16:44:01 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/02/04 16:21:10 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	write (1, "Error\n", 6);
-	exit(1);
-}
+	size_t	i;
+	size_t	j;
 
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_info	info;
-
-	if (argc < 2)
-		exit(1);
-	stack_a = NULL;
-	stack_b = NULL;
-	stack_a = create_list(argc, argv, &info);
-	solve(&stack_a, &stack_b, &info);
-	clear_stack(stack_a);
+	if (!*needle)
+		return ((char *)haystack);
+	i = 0;
+	while (haystack[i] != '\0' && i < len)
+	{
+		if (haystack[i] == needle[0])
+		{
+			j = 1;
+			while (needle[j] != '\0' && haystack[j + i] == needle[j]
+				&& (i + j) < len)
+				j++;
+			if (needle[j] == '\0')
+				return ((char *)&haystack[i]);
+		}
+		i++;
+	}
 	return (0);
 }

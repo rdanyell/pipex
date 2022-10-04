@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 13:23:04 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/02/21 14:51:46 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/11/12 16:21:44 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/02/21 14:57:08 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+int	get_next_line(char **line)
 {
-	write (1, "Error\n", 6);
-	exit(1);
-}
+	int		result;
+	int		i;
+	char	*buffer;
 
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_info	info;
-
-	if (argc < 2)
-		exit(1);
-	stack_a = NULL;
-	stack_b = NULL;
-	stack_a = create_list(argc, argv, &info);
-	solve(&stack_a, &stack_b, &info);
-	clear_stack(stack_a);
-	return (0);
+	result = 0;
+	i = 0;
+	buffer = malloc(100000);
+	if (!buffer)
+		return (0);
+	*line = buffer;
+	result = read(0, &buffer[i], 1);
+	while (result > 0 && buffer[i] != '\n')
+	{	
+		i++;
+		result = read(0, &buffer[i], 1);
+	}
+	buffer[i] = '\0';
+	return (result);
 }

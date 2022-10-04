@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 13:23:04 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/02/21 14:51:46 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/22 11:57:24 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/02/04 16:19:05 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+void	*ft_memmove(void *dst, const void *src, size_t n)
+
 {
-	write (1, "Error\n", 6);
-	exit(1);
-}
-
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_info	info;
-
-	if (argc < 2)
-		exit(1);
-	stack_a = NULL;
-	stack_b = NULL;
-	stack_a = create_list(argc, argv, &info);
-	solve(&stack_a, &stack_b, &info);
-	clear_stack(stack_a);
-	return (0);
+	if (!(dst || src))
+		return (dst);
+	if (src < dst)
+		while (n--)
+			((unsigned char *)dst)[n] = ((unsigned char *)src)[n];
+	if (src > dst)
+		ft_memcpy(dst, src, n);
+	return (dst);
 }

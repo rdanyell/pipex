@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 13:23:04 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/02/21 14:51:46 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/25 14:08:44 by rdanyell          #+#    #+#             */
+/*   Updated: 2022/02/04 16:20:51 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+char	*ft_strdup(const char *s1)
 {
-	write (1, "Error\n", 6);
-	exit(1);
-}
+	size_t	i;
+	size_t	len;
+	char	*str;
 
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_info	info;
-
-	if (argc < 2)
-		exit(1);
-	stack_a = NULL;
-	stack_b = NULL;
-	stack_a = create_list(argc, argv, &info);
-	solve(&stack_a, &stack_b, &info);
-	clear_stack(stack_a);
-	return (0);
+	len = ft_strlen((char *) s1);
+	str = (char *)malloc(sizeof(*str) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

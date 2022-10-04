@@ -6,66 +6,72 @@
 #    By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 12:33:05 by rdanyell          #+#    #+#              #
-#    Updated: 2022/03/18 18:47:14 by rdanyell         ###   ########.fr        #
+#    Updated: 2022/02/21 16:30:04 by rdanyell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_P		= pipex
+NAME_PS		= push_swap
 
-NAME_PB	= pipex_bonus
+NAME_PSB	= checker
 
-INCLUDES_P	= includes/
+LIB_DIR		= libft/
 
-HEADER_P	= includes/pipex.h
+LIBFT		= $(LIB_DIR)/libft.a
 
-HEADER_PB	= includes/pipex_bonus.h
+INCLUDES_PS	= includes/
 
-DIR_P		= srcs/
+HEADER_PS	= includes/push_swap.h
 
-DIR_UTILS	= utils_bonus/
+HEADER_PSB	= includes/push_swap_bonus.h
 
-DIR_PB		= bonus/
+DIR_PS		= srcs/
 
-FILES_P		= main.c children.c free.c
+DIR_PSB		= bonus/
 
-FILES_UTILS	= ft_split.c ft_strlen.c ft_strncmp.c ft_strrchr.c ft_substr.c ft_strjoin.c \
-				ft_printf.c ft_printf_utils.c get_next_line.c get_next_line_utils.c \
-				ft_strlcpy.c ft_strdup.c
+FILES_PS	= main.c create_list.c atoi_ps.c ft_parse.c actions.c actions2.c \
+			actions3.c actions4.c solve.c sort.c scores.c scripts.c		
 
-FILES_PB	= main_bonus.c error.c parse.c free_bonus.c file_bonus.c
+FILES_PSB	= checker_bonus.c create_list_bonus.c atoi_ps_bonus.c ft_parse_bonus.c \
+			actions_bonus.c actions2_bonus.c actions3_bonus.c actions4_bonus.c \
+			solve_bonus.c sort_bonus.c scripts_bonus.c scores_bonus.c
 
-SRCS_P		= $(addprefix $(DIR_P), $(FILES_P)) $(addprefix $(DIR_UTILS), $(FILES_UTILS))
+SRCS_PS		= $(addprefix $(DIR_PS), $(FILES_PS))
 
-SRCS_PB	= $(addprefix $(DIR_PB), $(FILES_PB)) $(addprefix $(DIR_UTILS), $(FILES_UTILS))
+SRCS_PSB	= $(addprefix $(DIR_PSB), $(FILES_PSB))
 
-OBJS_P		= $(SRCS_P:%.c=%.o)  
+OBJS_PS		= $(SRCS_PS:%.c=%.o)
 
-OBJS_PB	= $(SRCS_PB:%.c=%.o)
+OBJS_PSB	= $(SRCS_PSB:%.c=%.o)
 
 CC 			= cc
 
 CFLAGS		= -Wall -Wextra -Werror
 
-.PHONY: 	all clean fclean re bonus
+.PHONY: 	all libft clean fclean re bonus
 
-all:		$(NAME_P)
+all:		libft $(NAME_PS)
+
+libft:
+			make -C $(LIB_DIR)
 
 bonus:
-			@make NAME_P="$(NAME_PB)" \
-			OBJS_P="$(OBJS_PB)" \
-			HEADER_P="$(HEADER_PB)" all
+			@make NAME_PS="$(NAME_PSB)" \
+			OBJS_PS="$(OBJS_PSB)" \
+			HEADER_PS="$(HEADER_PSB)" all
 
-$(NAME_P):	$(OBJS_P)
-			$(CC) $(OBJS_P) -o $@
+$(NAME_PS):	$(OBJS_PS)
+			$(CC) $(CFLAGS) $(OBJS_PS) $(LIBFT) -o $@
 
-%.o:		%.c $(HEADER_P) Makefile
-			$(CC) $(CFLAGS) -I $(INCLUDES_P) -c $< -o $@
+%.o:		%.c $(LIBFT) $(HEADER_PS) 
+			$(CC) $(CFLAGS) -I $(INCLUDES_PS) -c $< -o $@
 
 clean	:
-			$(RM) $(OBJS_P) $(OBJS_PB)
-							
+			$(RM) $(OBJS_PS) $(OBJS_PSB)
+			make -C $(LIB_DIR) clean
+				
 fclean	:	clean
-			rm -r $(NAME_P) $(NAME_PB)
-			
+			rm -r $(NAME_PS) $(NAME_PSB)
+			make -C $(LIB_DIR) fclean
+
 re		:	fclean all
 	

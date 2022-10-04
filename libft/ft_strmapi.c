@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdanyell <rdanyell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 13:23:04 by rdanyell          #+#    #+#             */
-/*   Updated: 2022/02/21 14:51:46 by rdanyell         ###   ########.fr       */
+/*   Created: 2021/10/27 10:54:54 by rdanyell          #+#    #+#             */
+/*   Updated: 2021/10/27 11:12:36 by rdanyell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	write (1, "Error\n", 6);
-	exit(1);
-}
+	char	*s1;
+	int		i;
 
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_info	info;
-
-	if (argc < 2)
-		exit(1);
-	stack_a = NULL;
-	stack_b = NULL;
-	stack_a = create_list(argc, argv, &info);
-	solve(&stack_a, &stack_b, &info);
-	clear_stack(stack_a);
-	return (0);
+	if (!s || !f)
+		return (NULL);
+	s1 = (char *)malloc(sizeof(char) * (ft_strlen((char *)s) + 1));
+	if (!s1)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		s1[i] = f(i, s[i]);
+		i++;
+	}
+	s1[i] = '\0';
+	return (s1);
 }
